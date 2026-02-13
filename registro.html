@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Crea tu cuenta en FinanzApp">
+    <title>Registro - FinanzApp</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <!-- COLUMNA IZQUIERDA: Información -->
+        <div class="auth-info">
+            <div class="auth-info-content">
+                <div class="logo-large">
+                    <i class="fas fa-wallet"></i>
+                    <h1>FinanzApp</h1>
+                </div>
+                <h2>Comienza tu viaje financiero</h2>
+                <p>Únete a miles de personas que ya controlan sus finanzas</p>
+                
+                <div class="auth-features">
+                    <div class="auth-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Registro rápido y sencillo</span>
+                    </div>
+                    <div class="auth-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>100% Gratis para siempre</span>
+                    </div>
+                    <div class="auth-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Protección de datos garantizada</span>
+                    </div>
+                </div>
+
+                <!-- TESTIMONIOS -->
+                <div class="testimonial">
+                    <p>"FinanzApp cambió mi forma de administrar el dinero. ¡Altamente recomendado!"</p>
+                    <div class="testimonial-author">
+                        <strong>María González</strong>
+                        <span>Usuario desde 2024</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COLUMNA DERECHA: Formulario de Registro -->
+        <div class="auth-form-container">
+            <div class="auth-form-wrapper">
+                <a href="index.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Volver al inicio
+                </a>
+
+                <div class="auth-header">
+                    <h2>Crear Cuenta</h2>
+                    <p>Completa el formulario para registrarte</p>
+                </div>
+
+                <!-- INDICADOR DE PROGRESO DEL FORMULARIO -->
+                <div class="form-progress">
+                    <div class="progress-step active" data-step="1">
+                        <span class="step-number">1</span>
+                        <span class="step-label">Datos Personales</span>
+                    </div>
+                    <div class="progress-step" data-step="2">
+                        <span class="step-number">2</span>
+                        <span class="step-label">Cuenta</span>
+                    </div>
+                    <div class="progress-step" data-step="3">
+                        <span class="step-number">3</span>
+                        <span class="step-label">Confirmación</span>
+                    </div>
+                </div>
+
+                <!-- FORMULARIO DE REGISTRO CON MÚLTIPLES PASOS -->
+                <form class="auth-form" id="registroForm" novalidate>
+                    
+                    <!-- PASO 1: DATOS PERSONALES -->
+                    <div class="form-step active" id="step1">
+                        <h3 class="step-title">Paso 1: Información Personal</h3>
+
+                        <!-- TIPO DE IDENTIFICACIÓN -->
+                        <div class="form-group">
+                            <label for="tipoIdentificacion" class="form-label">
+                                <i class="fas fa-id-card"></i> Tipo de Identificación
+                            </label>
+                            <select 
+                                id="tipoIdentificacion" 
+                                name="tipoIdentificacion" 
+                                class="form-input"
+                                required
+                            >
+                                <option value="">Selecciona un tipo</option>
+                                <option value="1">Cédula de Ciudadanía</option>
+                                <option value="2">Cédula de Extranjería</option>
+                                <option value="3">Tarjeta de Identidad</option>
+                                <option value="4">Pasaporte</option>
+                            </select>
+                            <span class="form-error" id="tipoIdentificacionError"></span>
+                        </div>
+
+                        <!-- NÚMERO DE IDENTIFICACIÓN -->
+                        <div class="form-group">
+                            <label for="numeroIdentificacion" class="form-label">
+                                Número de Identificación
+                            </label>
+                            <input 
+                                type="text" 
+                                id="numeroIdentificacion" 
+                                name="numeroIdentificacion" 
+                                class="form-input" 
+                                placeholder="1234567890"
+                                required
+                            >
+                            <span class="form-error" id="numeroIdentificacionError"></span>
+                        </div>
+
+                        <!-- NOMBRE Y APELLIDO EN FILA -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nombre" class="form-label">
+                                    <i class="fas fa-user"></i> Nombre
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="nombre" 
+                                    name="nombre" 
+                                    class="form-input" 
+                                    placeholder="Juan"
+                                    required
+                                    autocomplete="given-name"
+                                >
+                                <span class="form-error" id="nombreError"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="apellido" class="form-label">
+                                    <i class="fas fa-user"></i> Apellido
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="apellido" 
+                                    name="apellido" 
+                                    class="form-input" 
+                                    placeholder="Pérez"
+                                    required
+                                    autocomplete="family-name"
+                                >
+                                <span class="form-error" id="apellidoError"></span>
+                            </div>
+                        </div>
+
+                        <!-- TELÉFONO -->
+                        <div class="form-group">
+                            <label for="telefono" class="form-label">
+                                <i class="fas fa-phone"></i> Teléfono
+                            </label>
+                            <input 
+                                type="tel" 
+                                id="telefono" 
+                                name="telefono" 
+                                class="form-input" 
+                                placeholder="3001234567"
+                                required
+                                autocomplete="tel"
+                            >
+                            <span class="form-error" id="telefonoError"></span>
+                        </div>
+
+                        <button type="button" class="btn btn-primary btn-block" id="nextStep1">
+                            Siguiente <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- PASO 2: DATOS DE CUENTA -->
+                    <div class="form-step" id="step2">
+                        <h3 class="step-title">Paso 2: Credenciales de Acceso</h3>
+
+                        <!-- CORREO ELECTRÓNICO -->
+                        <div class="form-group">
+                            <label for="emailRegistro" class="form-label">
+                                <i class="fas fa-envelope"></i> Correo Electrónico
+                            </label>
+                            <input 
+                                type="email" 
+                                id="emailRegistro" 
+                                name="emailRegistro" 
+                                class="form-input" 
+                                placeholder="ejemplo@correo.com"
+                                required
+                                autocomplete="email"
+                            >
+                            <span class="form-error" id="emailRegistroError"></span>
+                        </div>
+
+                        <!-- CONTRASEÑA -->
+                        <div class="form-group">
+                            <label for="passwordRegistro" class="form-label">
+                                <i class="fas fa-lock"></i> Contraseña
+                            </label>
+                            <div class="password-input-wrapper">
+                                <input 
+                                    type="password" 
+                                    id="passwordRegistro" 
+                                    name="passwordRegistro" 
+                                    class="form-input" 
+                                    placeholder="••••••••"
+                                    required
+                                    autocomplete="new-password"
+                                >
+                                <button type="button" class="toggle-password" id="togglePasswordRegistro">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <!-- INDICADOR DE FORTALEZA DE CONTRASEÑA -->
+                            <div class="password-strength" id="passwordStrength">
+                                <div class="strength-bar">
+                                    <div class="strength-fill" id="strengthFill"></div>
+                                </div>
+                                <span class="strength-text" id="strengthText">Ingresa una contraseña</span>
+                            </div>
+                            <span class="form-error" id="passwordRegistroError"></span>
+                        </div>
+
+                        <!-- CONFIRMAR CONTRASEÑA -->
+                        <div class="form-group">
+                            <label for="confirmPassword" class="form-label">
+                                <i class="fas fa-lock"></i> Confirmar Contraseña
+                            </label>
+                            <div class="password-input-wrapper">
+                                <input 
+                                    type="password" 
+                                    id="confirmPassword" 
+                                    name="confirmPassword" 
+                                    class="form-input" 
+                                    placeholder="••••••••"
+                                    required
+                                    autocomplete="new-password"
+                                >
+                                <button type="button" class="toggle-password" id="toggleConfirmPassword">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <span class="form-error" id="confirmPasswordError"></span>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="button" class="btn btn-outline" id="prevStep2">
+                                <i class="fas fa-arrow-left"></i> Anterior
+                            </button>
+                            <button type="button" class="btn btn-primary" id="nextStep2">
+                                Siguiente <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- PASO 3: CONFIRMACIÓN -->
+                    <div class="form-step" id="step3">
+                        <h3 class="step-title">Paso 3: Confirmación</h3>
+
+                        <!-- RESUMEN DE DATOS -->
+                        <div class="summary-card">
+                            <h4>Revisa tu información</h4>
+                            <div class="summary-item">
+                                <strong>Nombre Completo:</strong>
+                                <span id="summaryNombre"></span>
+                            </div>
+                            <div class="summary-item">
+                                <strong>Identificación:</strong>
+                                <span id="summaryIdentificacion"></span>
+                            </div>
+                            <div class="summary-item">
+                                <strong>Teléfono:</strong>
+                                <span id="summaryTelefono"></span>
+                            </div>
+                            <div class="summary-item">
+                                <strong>Correo:</strong>
+                                <span id="summaryEmail"></span>
+                            </div>
+                        </div>
+
+                        <!-- TÉRMINOS Y CONDICIONES -->
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="terminos" name="terminos" required>
+                                <span>
+                                    Acepto los <a href="#" class="link-primary">Términos y Condiciones</a> 
+                                    y la <a href="#" class="link-primary">Política de Privacidad</a>
+                                </span>
+                            </label>
+                            <span class="form-error" id="terminosError"></span>
+                        </div>
+
+                        <!-- NEWSLETTER -->
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="newsletter" name="newsletter">
+                                <span>Quiero recibir tips financieros y novedades por correo</span>
+                            </label>
+                        </div>
+
+                        <!-- MENSAJE DE ERROR GENERAL -->
+                        <div class="alert alert-error" id="registroError" style="display: none;">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span id="registroErrorMessage"></span>
+                        </div>
+
+                        <!-- MENSAJE DE ÉXITO -->
+                        <div class="alert alert-success" id="registroSuccess" style="display: none;">
+                            <i class="fas fa-check-circle"></i>
+                            <span>¡Registro exitoso! Redirigiendo al dashboard...</span>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="button" class="btn btn-outline" id="prevStep3">
+                                <i class="fas fa-arrow-left"></i> Anterior
+                            </button>
+                            <button type="submit" class="btn btn-primary" id="registroBtn">
+                                <i class="fas fa-user-plus"></i> Crear Cuenta
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ENLACE A LOGIN -->
+                    <div class="auth-switch">
+                        <p>¿Ya tienes una cuenta? <a href="login.html" class="link-primary">Inicia sesión aquí</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

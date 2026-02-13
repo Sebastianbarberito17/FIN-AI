@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recordatorios - FinanzApp</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-page">
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-wallet"></i>
+                <span class="logo-text">FinanzApp</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="dashboard.html" class="nav-link">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="movimientos.html" class="nav-link">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>Movimientos</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="metas.html" class="nav-link">
+                        <i class="fas fa-bullseye"></i>
+                        <span>Metas de Ahorro</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="recordatorios.html" class="nav-link">
+                        <i class="fas fa-bell"></i>
+                        <span>Recordatorios</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="tips.html" class="nav-link">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Tips Financieros</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="perfil.html" class="nav-link">
+                        <i class="fas fa-user"></i>
+                        <span>Mi Perfil</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="btn btn-outline btn-block" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Cerrar Sesión</span>
+            </button>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">Recordatorios</h1>
+            </div>
+            <div class="topbar-right">
+                <button class="btn btn-primary" id="nuevoRecordatorioBtn">
+                    <i class="fas fa-plus"></i> Nuevo Recordatorio
+                </button>
+            </div>
+        </header>
+
+        <div class="content">
+            <div class="stats-grid stats-small">
+                <div class="stat-card">
+                    <div class="stat-icon bg-warning">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-body">
+                        <p class="stat-label">Pendientes</p>
+                        <h3 class="stat-value" id="recordatoriosPendientes">0</h3>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon bg-danger">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="stat-body">
+                        <p class="stat-label">Vencidos</p>
+                        <h3 class="stat-value text-danger" id="recordatoriosVencidos">0</h3>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon bg-success">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-body">
+                        <p class="stat-label">Completados</p>
+                        <h3 class="stat-value" id="recordatoriosCompletados">0</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="filters-container">
+                        <div class="filter-group">
+                            <label>Estado</label>
+                            <select id="filtroEstado" class="form-select">
+                                <option value="">Todos</option>
+                                <option value="pendiente">Pendientes</option>
+                                <option value="completado">Completados</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Ordenar por</label>
+                            <select id="ordenar" class="form-select">
+                                <option value="fecha">Fecha</option>
+                                <option value="recientes">Más Recientes</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recordatorios-container" id="recordatoriosContainer">
+                <!-- Se llenarán dinámicamente -->
+            </div>
+
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <i class="fas fa-bell-slash"></i>
+                <h3>No tienes recordatorios</h3>
+                <p>Crea recordatorios para nunca olvidar tus pagos importantes</p>
+                <button class="btn btn-primary" id="crearPrimerRecordatorioBtn">
+                    <i class="fas fa-plus"></i> Crear Primer Recordatorio
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="recordatorioModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Nuevo Recordatorio</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="recordatorioForm">
+                    <input type="hidden" id="recordatorioId">
+                    <div class="form-group">
+                        <label for="titulo" class="form-label">Título</label>
+                        <input type="text" id="titulo" class="form-input" placeholder="Ej: Pago de tarjeta de crédito" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion" class="form-label">Descripción (Opcional)</label>
+                        <textarea id="descripcion" class="form-input" rows="3" placeholder="Detalles adicionales..."></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="fechaRecordatorio" class="form-label">Fecha</label>
+                            <input type="date" id="fechaRecordatorio" class="form-input" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="horaRecordatorio" class="form-label">Hora (Opcional)</label>
+                            <input type="time" id="horaRecordatorio" class="form-input">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="monto" class="form-label">Monto (Opcional)</label>
+                        <div class="input-group">
+                            <span class="input-prefix">$</span>
+                            <input type="number" id="monto" class="form-input" placeholder="0.00" step="0.01" min="0">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Tipo de Recordatorio</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="tipoRecordatorio" value="pago" checked>
+                                <span class="radio-custom">💳 Pago</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="tipoRecordatorio" value="ingreso">
+                                <span class="radio-custom">💰 Ingreso</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="tipoRecordatorio" value="otro">
+                                <span class="radio-custom">📌 Otro</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline" id="cancelarBtn">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="guardarBtn">
+                            <i class="fas fa-save"></i> Guardar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="js/app.js"></script>
+</body>
+</html>

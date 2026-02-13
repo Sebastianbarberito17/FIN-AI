@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - FinanzApp</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-page">
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-wallet"></i>
+                <span class="logo-text">FinanzApp</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="dashboard.html" class="nav-link">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="movimientos.html" class="nav-link">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>Movimientos</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="metas.html" class="nav-link">
+                        <i class="fas fa-bullseye"></i>
+                        <span>Metas de Ahorro</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="recordatorios.html" class="nav-link">
+                        <i class="fas fa-bell"></i>
+                        <span>Recordatorios</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="tips.html" class="nav-link">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Tips Financieros</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="perfil.html" class="nav-link">
+                        <i class="fas fa-user"></i>
+                        <span>Mi Perfil</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="btn btn-outline btn-block" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Cerrar Sesión</span>
+            </button>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">Mi Perfil</h1>
+            </div>
+        </header>
+
+        <div class="content">
+            <div class="profile-container">
+                <div class="profile-sidebar">
+                    <div class="profile-card">
+                        <div class="profile-avatar">
+                            <img src="https://ui-avatars.com/api/?name=Usuario&background=2563eb&color=fff&size=200" alt="Avatar" id="avatarImg">
+                            <button class="avatar-upload-btn">
+                                <i class="fas fa-camera"></i>
+                            </button>
+                        </div>
+                        <h3 id="profileName">Usuario Demo</h3>
+                        <p id="profileEmail">usuario@example.com</p>
+                        <div class="profile-stats">
+                            <div class="profile-stat">
+                                <strong id="diasActivo">30</strong>
+                                <span>Días Activo</span>
+                            </div>
+                            <div class="profile-stat">
+                                <strong id="metasAlcanzadas">5</strong>
+                                <span>Metas Alcanzadas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-content">
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="info">Información Personal</button>
+                        <button class="tab-btn" data-tab="perfil-financiero">Perfil Financiero</button>
+                        <button class="tab-btn" data-tab="seguridad">Seguridad</button>
+                    </div>
+
+                    <div class="tab-content active" id="info">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Información Personal</h3>
+                                <button class="btn btn-sm btn-primary" id="editarInfoBtn">
+                                    <i class="fas fa-edit"></i> Editar
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <form id="infoPersonalForm">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label class="form-label">Nombre</label>
+                                            <input type="text" id="nombre" class="form-input" readonly>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="form-label">Apellido</label>
+                                            <input type="text" id="apellido" class="form-input" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label class="form-label">Correo Electrónico</label>
+                                            <input type="email" id="correo" class="form-input" readonly>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="form-label">Teléfono</label>
+                                            <input type="tel" id="telefono" class="form-input" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label class="form-label">Tipo de Identificación</label>
+                                            <select id="tipoId" class="form-input" disabled>
+                                                <option value="1">Cédula de Ciudadanía</option>
+                                                <option value="2">Cédula de Extranjería</option>
+                                                <option value="3">Tarjeta de Identidad</option>
+                                                <option value="4">Pasaporte</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="form-label">Número de Identificación</label>
+                                            <input type="text" id="numeroId" class="form-input" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-buttons" style="display: none;" id="infoButtons">
+                                        <button type="button" class="btn btn-outline" id="cancelarInfoBtn">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="perfil-financiero">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Perfil Financiero</h3>
+                                <button class="btn btn-sm btn-primary" id="editarFinancieroBtn">
+                                    <i class="fas fa-edit"></i> Editar
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <form id="perfilFinancieroForm">
+                                    <div class="form-group">
+                                        <label class="form-label">Ingreso Mensual</label>
+                                        <div class="input-group">
+                                            <span class="input-prefix">$</span>
+                                            <input type="number" id="ingresoMensual" class="form-input" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Nivel de Ahorro (%)</label>
+                                        <input type="number" id="nivelAhorro" class="form-input" min="0" max="100" readonly>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" id="nivelAhorroBar"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Objetivo Financiero Principal</label>
+                                        <select id="objetivoFinanciero" class="form-input" disabled>
+                                            <option value="">Selecciona un objetivo</option>
+                                            <option value="ahorrar">Ahorrar para el futuro</option>
+                                            <option value="deudas">Pagar deudas</option>
+                                            <option value="invertir">Invertir</option>
+                                            <option value="emergencia">Fondo de emergencia</option>
+                                            <option value="educacion">Educación</option>
+                                            <option value="vivienda">Comprar vivienda</option>
+                                            <option value="otro">Otro</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-buttons" style="display: none;" id="financieroButtons">
+                                        <button type="button" class="btn btn-outline" id="cancelarFinancieroBtn">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="seguridad">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Cambiar Contraseña</h3>
+                            </div>
+                            <div class="card-body">
+                                <form id="cambiarPasswordForm">
+                                    <div class="form-group">
+                                        <label class="form-label">Contraseña Actual</label>
+                                        <input type="password" id="passwordActual" class="form-input" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Nueva Contraseña</label>
+                                        <input type="password" id="passwordNueva" class="form-input" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Confirmar Nueva Contraseña</label>
+                                        <input type="password" id="passwordConfirmar" class="form-input" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Cambiar Contraseña</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Zona Peligrosa</h3>
+                            </div>
+                            <div class="card-body">
+                                <p>Eliminar tu cuenta es permanente y no se puede deshacer.</p>
+                                <button class="btn btn-danger" id="eliminarCuentaBtn">
+                                    <i class="fas fa-trash"></i> Eliminar Mi Cuenta
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/app.js"></script>
+</body>
+</html>

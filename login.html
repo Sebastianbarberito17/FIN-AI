@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Inicia sesión en FinanzApp">
+    <title>Iniciar Sesión - FinanzApp</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="auth-page">
+    <!-- CONTENEDOR DE AUTENTICACIÓN -->
+    <div class="auth-container">
+        <!-- COLUMNA IZQUIERDA: Información -->
+        <div class="auth-info">
+            <div class="auth-info-content">
+                <div class="logo-large">
+                    <i class="fas fa-wallet"></i>
+                    <h1>FinanzApp</h1>
+                </div>
+                <h2>Bienvenido de nuevo</h2>
+                <p>Continúa gestionando tus finanzas de forma inteligente</p>
+                
+                <div class="auth-features">
+                    <div class="auth-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Acceso seguro y encriptado</span>
+                    </div>
+                    <div class="auth-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Sincronización en tiempo real</span>
+                    </div>
+                    <div class="auth-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Disponible 24/7</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COLUMNA DERECHA: Formulario de Login -->
+        <div class="auth-form-container">
+            <div class="auth-form-wrapper">
+                <!-- ENLACE PARA VOLVER -->
+                <a href="index.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Volver al inicio
+                </a>
+
+                <div class="auth-header">
+                    <h2>Iniciar Sesión</h2>
+                    <p>Ingresa tus credenciales para acceder</p>
+                </div>
+
+                <!-- 
+                    FORMULARIO DE LOGIN
+                    - novalidate: Desactiva validación HTML5 para usar validación personalizada
+                    - Los atributos 'required' son importantes para accesibilidad
+                -->
+                <form class="auth-form" id="loginForm" novalidate>
+                    <!-- CAMPO DE CORREO ELECTRÓNICO -->
+                    <div class="form-group">
+                        <label for="email" class="form-label">
+                            <i class="fas fa-envelope"></i> Correo Electrónico
+                        </label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            class="form-input" 
+                            placeholder="ejemplo@correo.com"
+                            required
+                            autocomplete="email"
+                        >
+                        <span class="form-error" id="emailError"></span>
+                    </div>
+
+                    <!-- CAMPO DE CONTRASEÑA -->
+                    <div class="form-group">
+                        <label for="password" class="form-label">
+                            <i class="fas fa-lock"></i> Contraseña
+                        </label>
+                        <div class="password-input-wrapper">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                class="form-input" 
+                                placeholder="••••••••"
+                                required
+                                autocomplete="current-password"
+                            >
+                            <!-- BOTÓN PARA MOSTRAR/OCULTAR CONTRASEÑA -->
+                            <button type="button" class="toggle-password" id="togglePassword">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <span class="form-error" id="passwordError"></span>
+                    </div>
+
+                    <!-- RECORDARME Y OLVIDÉ CONTRASEÑA -->
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="remember" name="remember">
+                            <span>Recordarme</span>
+                        </label>
+                        <a href="#" class="link-primary">¿Olvidaste tu contraseña?</a>
+                    </div>
+
+                    <!-- MENSAJE DE ERROR GENERAL -->
+                    <div class="alert alert-error" id="loginError" style="display: none;">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="loginErrorMessage"></span>
+                    </div>
+
+                    <!-- MENSAJE DE ÉXITO -->
+                    <div class="alert alert-success" id="loginSuccess" style="display: none;">
+                        <i class="fas fa-check-circle"></i>
+                        <span>¡Login exitoso! Redirigiendo...</span>
+                    </div>
+
+                    <!-- BOTÓN DE ENVÍO -->
+                    <button type="submit" class="btn btn-primary btn-block" id="loginBtn">
+                        <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                    </button>
+
+                    <!-- DIVISOR -->
+                    <div class="divider">
+                        <span>O continuar con</span>
+                    </div>
+
+                    <!-- BOTONES DE LOGIN SOCIAL (Opcional) -->
+                    <div class="social-login">
+                        <button type="button" class="btn btn-social btn-google">
+                            <i class="fab fa-google"></i> Google
+                        </button>
+                        <button type="button" class="btn btn-social btn-facebook">
+                            <i class="fab fa-facebook"></i> Facebook
+                        </button>
+                    </div>
+
+                    <!-- ENLACE A REGISTRO -->
+                    <div class="auth-switch">
+                        <p>¿No tienes una cuenta? <a href="registro.html" class="link-primary">Regístrate aquí</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

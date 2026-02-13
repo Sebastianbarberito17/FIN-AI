@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movimientos Financieros - FinanzApp</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-page">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-wallet"></i>
+                <span class="logo-text">FinanzApp</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="dashboard.html" class="nav-link">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="movimientos.html" class="nav-link">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>Movimientos</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="metas.html" class="nav-link">
+                        <i class="fas fa-bullseye"></i>
+                        <span>Metas de Ahorro</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="recordatorios.html" class="nav-link">
+                        <i class="fas fa-bell"></i>
+                        <span>Recordatorios</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="tips.html" class="nav-link">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Tips Financieros</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="perfil.html" class="nav-link">
+                        <i class="fas fa-user"></i>
+                        <span>Mi Perfil</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="btn btn-outline btn-block" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Cerrar Sesión</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="main-content">
+        <!-- TOPBAR -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">Movimientos Financieros</h1>
+            </div>
+            <div class="topbar-right">
+                <button class="btn btn-primary" id="nuevoMovimientoBtn">
+                    <i class="fas fa-plus"></i> Nuevo Movimiento
+                </button>
+            </div>
+        </header>
+
+        <!-- CONTENIDO -->
+        <div class="content">
+            <!-- RESUMEN RÁPIDO -->
+            <div class="stats-grid stats-small">
+                <div class="stat-card">
+                    <div class="stat-icon bg-success">
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                    <div class="stat-body">
+                        <p class="stat-label">Total Ingresos</p>
+                        <h3 class="stat-value text-success" id="totalIngresos">$0</h3>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon bg-danger">
+                        <i class="fas fa-minus-circle"></i>
+                    </div>
+                    <div class="stat-body">
+                        <p class="stat-label">Total Gastos</p>
+                        <h3 class="stat-value text-danger" id="totalGastos">$0</h3>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon bg-primary">
+                        <i class="fas fa-equals"></i>
+                    </div>
+                    <div class="stat-body">
+                        <p class="stat-label">Balance</p>
+                        <h3 class="stat-value" id="balance">$0</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FILTROS Y BÚSQUEDA -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="filters-container">
+                        <div class="filter-group">
+                            <label>Tipo</label>
+                            <select id="filtroTipo" class="form-select">
+                                <option value="">Todos</option>
+                                <option value="ingreso">Ingresos</option>
+                                <option value="gasto">Gastos</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Categoría</label>
+                            <select id="filtroCategoria" class="form-select">
+                                <option value="">Todas</option>
+                                <option value="salario">Salario</option>
+                                <option value="freelance">Freelance</option>
+                                <option value="alimentacion">Alimentación</option>
+                                <option value="transporte">Transporte</option>
+                                <option value="servicios">Servicios</option>
+                                <option value="entretenimiento">Entretenimiento</option>
+                                <option value="otros">Otros</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Desde</label>
+                            <input type="date" id="filtroDesde" class="form-input">
+                        </div>
+                        <div class="filter-group">
+                            <label>Hasta</label>
+                            <input type="date" id="filtroHasta" class="form-input">
+                        </div>
+                        <div class="filter-group">
+                            <label>&nbsp;</label>
+                            <button class="btn btn-outline" id="limpiarFiltros">
+                                <i class="fas fa-times"></i> Limpiar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TABLA DE MOVIMIENTOS -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>Lista de Movimientos</h3>
+                    <div class="card-actions">
+                        <button class="btn btn-sm btn-outline" id="exportarBtn">
+                            <i class="fas fa-download"></i> Exportar
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="data-table" id="movimientosTable">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Tipo</th>
+                                    <th>Categoría</th>
+                                    <th>Descripción</th>
+                                    <th>Monto</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="movimientosTableBody">
+                                <!-- Se llenará dinámicamente -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- PAGINACIÓN -->
+                    <div class="pagination" id="paginacion">
+                        <button class="btn btn-sm" id="prevPage" disabled>Anterior</button>
+                        <span id="pageInfo">Página 1 de 1</span>
+                        <button class="btn btn-sm" id="nextPage" disabled>Siguiente</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL NUEVO/EDITAR MOVIMIENTO -->
+    <div class="modal" id="movimientoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Nuevo Movimiento</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="movimientoForm">
+                    <input type="hidden" id="movimientoId">
+                    
+                    <!-- TIPO DE MOVIMIENTO -->
+                    <div class="form-group">
+                        <label class="form-label">Tipo de Movimiento</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="tipo" value="ingreso" checked>
+                                <span class="radio-custom ingreso">
+                                    <i class="fas fa-plus-circle"></i> Ingreso
+                                </span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="tipo" value="gasto">
+                                <span class="radio-custom gasto">
+                                    <i class="fas fa-minus-circle"></i> Gasto
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- CATEGORÍA -->
+                    <div class="form-group">
+                        <label for="categoria" class="form-label">Categoría</label>
+                        <select id="categoria" name="categoria" class="form-input" required>
+                            <option value="">Selecciona una categoría</option>
+                            <optgroup label="Ingresos">
+                                <option value="salario">💼 Salario</option>
+                                <option value="freelance">💻 Freelance</option>
+                                <option value="inversiones">📈 Inversiones</option>
+                                <option value="otros-ingresos">➕ Otros Ingresos</option>
+                            </optgroup>
+                            <optgroup label="Gastos">
+                                <option value="alimentacion">🍔 Alimentación</option>
+                                <option value="transporte">🚗 Transporte</option>
+                                <option value="servicios">💡 Servicios</option>
+                                <option value="entretenimiento">🎬 Entretenimiento</option>
+                                <option value="salud">⚕️ Salud</option>
+                                <option value="educacion">📚 Educación</option>
+                                <option value="otros-gastos">➖ Otros Gastos</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <!-- MONTO -->
+                    <div class="form-group">
+                        <label for="monto" class="form-label">Monto</label>
+                        <div class="input-group">
+                            <span class="input-prefix">$</span>
+                            <input 
+                                type="number" 
+                                id="monto" 
+                                name="monto" 
+                                class="form-input" 
+                                placeholder="0.00"
+                                step="0.01"
+                                min="0"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <!-- FECHA -->
+                    <div class="form-group">
+                        <label for="fecha" class="form-label">Fecha</label>
+                        <input 
+                            type="date" 
+                            id="fecha" 
+                            name="fecha" 
+                            class="form-input" 
+                            required
+                        >
+                    </div>
+
+                    <!-- DESCRIPCIÓN -->
+                    <div class="form-group">
+                        <label for="descripcion" class="form-label">Descripción (Opcional)</label>
+                        <textarea 
+                            id="descripcion" 
+                            name="descripcion" 
+                            class="form-input" 
+                            rows="3"
+                            placeholder="Añade detalles sobre este movimiento..."
+                        ></textarea>
+                    </div>
+
+                    <!-- BOTONES -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline" id="cancelarBtn">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="guardarBtn">
+                            <i class="fas fa-save"></i> Guardar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

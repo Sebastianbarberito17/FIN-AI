@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metas de Ahorro - FinanzApp</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-page">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-wallet"></i>
+                <span class="logo-text">FinanzApp</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="dashboard.html" class="nav-link">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="movimientos.html" class="nav-link">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>Movimientos</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="metas.html" class="nav-link">
+                        <i class="fas fa-bullseye"></i>
+                        <span>Metas de Ahorro</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="recordatorios.html" class="nav-link">
+                        <i class="fas fa-bell"></i>
+                        <span>Recordatorios</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="tips.html" class="nav-link">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Tips Financieros</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="perfil.html" class="nav-link">
+                        <i class="fas fa-user"></i>
+                        <span>Mi Perfil</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="btn btn-outline btn-block" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Cerrar Sesión</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="main-content">
+        <!-- TOPBAR -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">Metas de Ahorro</h1>
+            </div>
+            <div class="topbar-right">
+                <button class="btn btn-primary" id="nuevaMetaBtn">
+                    <i class="fas fa-plus"></i> Nueva Meta
+                </button>
+            </div>
+        </header>
+
+        <!-- CONTENIDO -->
+        <div class="content">
+            <!-- RESUMEN DE METAS -->
+            <div class="stats-grid stats-small">
+                <div class="stat-card">
+                    <div class="stat-icon bg-primary">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <div class="stat-body">
+                        <p class="stat-label">Metas Activas</p>
+                        <h3 class="stat-value" id="metasActivas">0</h3>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon bg-success">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="stat-body">
+                        <p class="stat-label">Metas Completadas</p>
+                        <h3 class="stat-value" id="metasCompletadas">0</h3>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon bg-warning">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <div class="stat-body">
+                        <p class="stat-label">Total Ahorrado</p>
+                        <h3 class="stat-value" id="totalAhorrado">$0</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FILTROS -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="filters-container">
+                        <div class="filter-group">
+                            <label>Estado</label>
+                            <select id="filtroEstado" class="form-select">
+                                <option value="">Todas</option>
+                                <option value="en-progreso">En Progreso</option>
+                                <option value="completada">Completadas</option>
+                                <option value="pausada">Pausadas</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Ordenar por</label>
+                            <select id="ordenar" class="form-select">
+                                <option value="recientes">Más Recientes</option>
+                                <option value="progreso">Mayor Progreso</option>
+                                <option value="monto">Mayor Monto</option>
+                                <option value="proximas">Próximas a Vencer</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GRID DE METAS -->
+            <div class="metas-grid" id="metasGrid">
+                <!-- Las metas se cargarán dinámicamente -->
+            </div>
+
+            <!-- ESTADO VACÍO (se muestra si no hay metas) -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <i class="fas fa-bullseye"></i>
+                <h3>No tienes metas de ahorro</h3>
+                <p>Crea tu primera meta y comienza a ahorrar para tus objetivos</p>
+                <button class="btn btn-primary" id="crearPrimeraMetaBtn">
+                    <i class="fas fa-plus"></i> Crear Primera Meta
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL NUEVA/EDITAR META -->
+    <div class="modal" id="metaModal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3 id="modalTitle">Nueva Meta de Ahorro</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="metaForm">
+                    <input type="hidden" id="metaId">
+
+                    <div class="form-row">
+                        <!-- NOMBRE DE LA META -->
+                        <div class="form-group col-md-6">
+                            <label for="nombreMeta" class="form-label">Nombre de la Meta</label>
+                            <input 
+                                type="text" 
+                                id="nombreMeta" 
+                                class="form-input" 
+                                placeholder="Ej: Vacaciones, Auto nuevo, Fondo emergencia"
+                                required
+                            >
+                        </div>
+
+                        <!-- MONTO OBJETIVO -->
+                        <div class="form-group col-md-6">
+                            <label for="montoObjetivo" class="form-label">Monto Objetivo</label>
+                            <div class="input-group">
+                                <span class="input-prefix">$</span>
+                                <input 
+                                    type="number" 
+                                    id="montoObjetivo" 
+                                    class="form-input" 
+                                    placeholder="0.00"
+                                    step="0.01"
+                                    min="1"
+                                    required
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <!-- FECHA INICIO -->
+                        <div class="form-group col-md-6">
+                            <label for="fechaInicio" class="form-label">Fecha de Inicio</label>
+                            <input 
+                                type="date" 
+                                id="fechaInicio" 
+                                class="form-input" 
+                                required
+                            >
+                        </div>
+
+                        <!-- FECHA LÍMITE -->
+                        <div class="form-group col-md-6">
+                            <label for="fechaLimite" class="form-label">Fecha Límite</label>
+                            <input 
+                                type="date" 
+                                id="fechaLimite" 
+                                class="form-input" 
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <!-- AHORRO ACTUAL -->
+                    <div class="form-group">
+                        <label for="ahorroActual" class="form-label">Ahorro Actual (Opcional)</label>
+                        <div class="input-group">
+                            <span class="input-prefix">$</span>
+                            <input 
+                                type="number" 
+                                id="ahorroActual" 
+                                class="form-input" 
+                                placeholder="0.00"
+                                step="0.01"
+                                min="0"
+                                value="0"
+                            >
+                        </div>
+                        <small class="form-hint">Si ya tienes algo ahorrado para esta meta, ingrésalo aquí</small>
+                    </div>
+
+                    <!-- DESCRIPCIÓN/NOTAS -->
+                    <div class="form-group">
+                        <label for="descripcionMeta" class="form-label">Descripción/Notas (Opcional)</label>
+                        <textarea 
+                            id="descripcionMeta" 
+                            class="form-input" 
+                            rows="3"
+                            placeholder="Describe tu meta, por qué es importante para ti..."
+                        ></textarea>
+                    </div>
+
+                    <!-- ICONO/CATEGORÍA -->
+                    <div class="form-group">
+                        <label class="form-label">Ícono de la Meta</label>
+                        <div class="icon-selector">
+                            <label class="icon-option">
+                                <input type="radio" name="iconoMeta" value="vacation" checked>
+                                <span>🏖️ Vacaciones</span>
+                            </label>
+                            <label class="icon-option">
+                                <input type="radio" name="iconoMeta" value="car">
+                                <span>🚗 Auto</span>
+                            </label>
+                            <label class="icon-option">
+                                <input type="radio" name="iconoMeta" value="home">
+                                <span>🏠 Casa</span>
+                            </label>
+                            <label class="icon-option">
+                                <input type="radio" name="iconoMeta" value="education">
+                                <span>📚 Educación</span>
+                            </label>
+                            <label class="icon-option">
+                                <input type="radio" name="iconoMeta" value="emergency">
+                                <span>🚨 Emergencias</span>
+                            </label>
+                            <label class="icon-option">
+                                <input type="radio" name="iconoMeta" value="other">
+                                <span>💰 Otro</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- BOTONES -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline" id="cancelarMetaBtn">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="guardarMetaBtn">
+                            <i class="fas fa-save"></i> Guardar Meta
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL AGREGAR AHORRO A META -->
+    <div class="modal" id="agregarAhorroModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Agregar Ahorro</h3>
+                <button class="modal-close" id="closeAhorroModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="agregarAhorroForm">
+                    <input type="hidden" id="metaIdAhorro">
+                    
+                    <div class="form-group">
+                        <label for="montoAhorro" class="form-label">Monto a Agregar</label>
+                        <div class="input-group">
+                            <span class="input-prefix">$</span>
+                            <input 
+                                type="number" 
+                                id="montoAhorro" 
+                                class="form-input" 
+                                placeholder="0.00"
+                                step="0.01"
+                                min="1"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fechaAhorro" class="form-label">Fecha</label>
+                        <input 
+                            type="date" 
+                            id="fechaAhorro" 
+                            class="form-input" 
+                            required
+                        >
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline" id="cancelarAhorroBtn">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Agregar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
